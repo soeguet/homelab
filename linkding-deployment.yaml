@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: linkding
-          image: sissbruecker/linkding:nonexisting
+          image: sissbruecker/linkding:nonexistingv2
           ports:
             - containerPort: 9090
           volumeMounts:
