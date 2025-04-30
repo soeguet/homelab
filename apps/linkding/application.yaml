@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: linkding
+  namespace: default
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:soeguet/homelab.git
+    targetRevision: HEAD
+    path: apps/linkding
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default

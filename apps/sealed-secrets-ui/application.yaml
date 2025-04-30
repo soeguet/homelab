@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sealed-secrets-ui
+  namespace: sealed-secrets
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:soeguet/homelab.git
+    targetRevision: HEAD
+    path: apps/sealed-secrets-ui
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sealed-secrets
