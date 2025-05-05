@@ -5,11 +5,11 @@ metadata:
   namespace: paperless
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 4Gi
-  storageClassName: local-path
+  storageClassName: nfs-client
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -18,11 +18,11 @@ metadata:
   namespace: paperless
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 4Gi
-  storageClassName: local-path
+  storageClassName: nfs-client
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -31,9 +31,9 @@ metadata:
   namespace: paperless
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 2Gi
-  storageClassName: local-path
+  storageClassName: nfs-client
 
