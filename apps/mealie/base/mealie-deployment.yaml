@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mealie
+  namespace: mealie
+  labels:
+    app: mealie
+    app.kubernetes.io/name: mealie
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: mealie
+  template:
+    metadata:
+      labels:
+        app: mealie
+        app.kubernetes.io/name: mealie
+    spec:
+      securityContext:
+        runAsUser: 911
+        runAsGroup: 911
+      volumes:
+        - name: mealie-data-pvc
+          persistentVolumeClaim:
+            claimName: mealie-data-pvc
+        - name: nltk-data
+          emptyDir: {}
+      containers:
+        - name: mealie
+          image: ghcr.io/mealie-recipes/mealie:latest
+          imagePullPolicy: Always
+          env:
+            - name: NLTK_DATA
+              value: /nltk_data
+          # resources:
+          #   requests:
+          #     cpu: 100m
+          #     memory: 256Mi
+          #   limits:
+          #     cpu: 200m
+          #     memory: 512Mi
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+          - name: mealie-data-pvc
+            mountPath: /app/data/
+          - name: nltk-data
+            mountPath: /nltk_data
+          envFrom:
+            - configMapRef:
+                name: mealie-configs
+            - secretRef:
+                name: mealie-secrets
+          # livenessProbe:
+          #   httpGet:
+          #     path: /g/home
+          #     port: 9000
+          #   initialDelaySeconds: 10
+          #   periodSeconds: 5
