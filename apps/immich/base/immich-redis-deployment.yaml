@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-immich-server
+  namespace: immich
+  labels:
+    app: redis-immich-server
+spec:
+  selector:
+    matchLabels:
+      app: redis-immich-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis-immich-server
+    spec:
+      containers:
+        - image: redis:alpine
+          name: redis-immich-server
+          ports:
+            - containerPort: 6379
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-immich-server
+  namespace: immich
+  labels:
+    app: redis-immich-server
+spec:
+  ports:
+    - port: 6379
+  selector:
+    app: redis-immich-server

@@ -1,0 +1,16 @@
+# https://github.com/jasjeetsuri/myk3s/blob/main/yaml_configs/immich/
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: immich-library-pvc
+  namespace: immich
+  labels:
+    app: immich
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: nfs-client
