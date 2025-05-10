@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: kubewall
+    app.kubernetes.io/instance: kubewall
+    app.kubernetes.io/version: "0.0.11"
+  name: kubewall-nodeport-service
+  namespace: kubewall-system
+spec:
+  ports:
+    - name: kubewall-nodeport-service
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+      nodePort: 30888
+  selector:
+    app.kubernetes.io/name: kubewall
+    app.kubernetes.io/instance: kubewall
+  type: NodePort
