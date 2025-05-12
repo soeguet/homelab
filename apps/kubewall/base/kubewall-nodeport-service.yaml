@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/instance: kubewall
     app.kubernetes.io/version: "0.0.11"
   name: kubewall-nodeport-service
-  namespace: kubewall-system
+  namespace: kubewall
 spec:
   ports:
     - name: kubewall-nodeport-service
