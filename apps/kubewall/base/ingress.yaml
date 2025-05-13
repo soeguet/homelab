@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kubewall-ingress
+  namespace: kubewall-system
+spec:
+  rules:
+  - host: kubewall.lokal
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kubewall
+            port:
+              name: https
+
