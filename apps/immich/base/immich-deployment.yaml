@@ -20,6 +20,26 @@ spec:
         fsGroup: 0
       serviceAccountName: default
       dnsPolicy: ClusterFirst
+      initContainers:
+      - name: init-directories
+        image: busybox
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            mkdir -p /usr/src/app/upload/library
+            mkdir -p /usr/src/app/upload/encoded-video
+            mkdir -p /usr/src/app/upload/thumbs
+            mkdir -p /usr/src/app/upload/profile
+            mkdir -p /usr/src/app/upload/backups
+            touch /usr/src/app/upload/library/.immich
+            touch /usr/src/app/upload/encoded-video/.immich
+            touch /usr/src/app/upload/thumbs/.immich
+            touch /usr/src/app/upload/profile/.immich
+            touch /usr/src/app/upload/backups/.immich
+            chmod -R 777 /usr/src/app/upload
+        volumeMounts:
+        - name: library
+          mountPath: /usr/src/app/upload
       containers:
         - name: immich-server
           image: "ghcr.io/immich-app/immich-server:release"
@@ -27,7 +47,7 @@ spec:
           securityContext:
             runAsUser: 0
           ports:
-            - containerPort: 3001
+            - containerPort: 2283
           env:
             - name: DB_HOSTNAME
               valueFrom:
@@ -67,7 +87,6 @@ spec:
           volumeMounts:
             - name: library
               mountPath: /usr/src/app/upload
-              subPath: library
       volumes:
         - name: library
           persistentVolumeClaim:
@@ -105,5 +124,3 @@ spec:
   selector:
     app: immich-server
   type: NodePort
-
-

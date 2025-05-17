@@ -22,57 +22,69 @@ spec:
       automountServiceAccountToken: true
       dnsPolicy: ClusterFirst
       enableServiceLinks: true
+      resources:
+        limits:
+          memory: "8Gi"
+          cpu: "2000m"
+        requests:
+          memory: "4Gi"
+          cpu: "1000m"
       containers:
-        - name: immich-machine-learning
-          image: "ghcr.io/immich-app/immich-machine-learning:release"
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 3003
-          env:
-            - name: DB_HOSTNAME
-              valueFrom:
-                secretKeyRef:
-                  name: immich-secret
-                  key: DB_HOSTNAME
-            - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: immich-secret
-                  key: DB_USERNAME
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: immich-secret
-                  key: DB_PASSWORD
-            - name: TRANSFORMERS_CACHE
-              value: /cache
-          envFrom:
-            - configMapRef:
-                name: immich-env
-                optional: false
-          livenessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /ping
-              port: 3003
-            initialDelaySeconds: 0
-            periodSeconds: 10
-            timeoutSeconds: 1
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /ping
-              port: 3003
-            initialDelaySeconds: 0
-            periodSeconds: 10
-            timeoutSeconds: 1
-          volumeMounts:
-            - name: cache
-              mountPath: /cache
-          resources: {}
+      - name: immich-machine-learning
+        image: "ghcr.io/immich-app/immich-machine-learning:release"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3003
+        env:
+        - name: DB_HOSTNAME
+          valueFrom:
+            secretKeyRef:
+              name: immich-secret
+              key: DB_HOSTNAME
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: immich-secret
+              key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: immich-secret
+              key: DB_PASSWORD
+        - name: TRANSFORMERS_CACHE
+          value: /cache
+        envFrom:
+        - configMapRef:
+            name: immich-env
+            optional: false
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /ping
+            port: 3003
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /ping
+            port: 3003
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 1
+        volumeMounts:
+        - name: model-cache
+          mountPath: /cache
+        - name: library
+          mountPath: /usr/src/app/upload
       volumes:
-        - name: cache
-          emptyDir: {}
+      - name: model-cache
+        persistentVolumeClaim:
+          claimName: immich-model-cache
+      - name: library
+        persistentVolumeClaim:
+          claimName: immich-library-pvc
 ---
 kind: Service
 apiVersion: v1
@@ -86,6 +98,6 @@ spec:
   selector:
     app: immich-machine-learning
   ports:
-    - port: 3003
-      targetPort: 3003
-      protocol: TCP
+  - port: 3003
+    targetPort: 3003
+    protocol: TCP

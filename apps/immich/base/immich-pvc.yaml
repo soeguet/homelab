@@ -1,5 +1,4 @@
 # https://github.com/jasjeetsuri/myk3s/blob/main/yaml_configs/immich/
-
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -13,4 +12,19 @@ spec:
   resources:
     requests:
       storage: 100Gi
+  storageClassName: nfs-client
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: immich-model-cache
+  namespace: immich
+  labels:
+    app: immich
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
   storageClassName: nfs-client

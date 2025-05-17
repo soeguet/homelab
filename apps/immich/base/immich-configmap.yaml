@@ -7,7 +7,14 @@ metadata:
     app: immich
 data:
   DB_DATABASE_NAME: "immich"
+  DB_PORT: "5432"
+  UPLOAD_LOCATION: "/usr/src/app/upload"
+  LOG_LEVEL: "debug"
   IMMICH_MACHINE_LEARNING_URL: "http://immich-machine-learning:3003"
+  MACHINE_LEARNING_HTTP_KEEPALIVE_TIMEOUT_S: "0"
+  MACHINE_LEARNING_CACHE_FOLDER: "/cache"
+  ML_WORKER_ENABLED: "true"
+  ML_WORKER_FACE_RECOGNITION_ENABLED: "true"
   REDIS_HOSTNAME: "redis-immich-server"
   REDIS_PORT: "6379"
   REDIS_DBINDEX: "0"
