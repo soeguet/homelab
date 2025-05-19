@@ -1,17 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kubewall-ingress
-  namespace: kubewall-system
+  name: mealie-ingress
+  namespace: mealie
 spec:
   rules:
-  - host: kubewall.lokal
+  - host: mealie.lokal
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: kubewall-clusterip
+            name: mealie-clusterip-service
             port:
-              name: https
+              name: cluster-http

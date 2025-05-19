@@ -1,17 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kubewall-ingress
-  namespace: kubewall-system
+  name: dashboard-ingress
+  namespace: dashboard
 spec:
   rules:
-  - host: kubewall.lokal
+  - host: dashboard.lokal
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: kubewall-clusterip
+            name: homepage-clusterip
             port:
-              name: https
+              name: http

@@ -104,7 +104,8 @@ spec:
   selector:
     app: immich-server
   ports:
-    - port: 2283
+    - name: immich-http
+      port: 2283
       targetPort: 2283
       protocol: TCP
 ---

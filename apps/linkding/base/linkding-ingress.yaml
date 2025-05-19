@@ -1,17 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kubewall-ingress
-  namespace: kubewall-system
+  name: linkding-ingress
+  namespace: linkding
 spec:
   rules:
-  - host: kubewall.lokal
+  - host: linkding.lokal
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: kubewall-clusterip
+            name: linkding-ipservice
             port:
-              name: https
+              name: linkding-http

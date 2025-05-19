@@ -1,17 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kubewall-ingress
-  namespace: kubewall-system
+  name: immich-ingress
+  namespace: immich
 spec:
   rules:
-  - host: kubewall.lokal
+  - host: immich.lokal
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: kubewall-clusterip
+            name: immich-server
             port:
-              name: https
+              name: immich-http

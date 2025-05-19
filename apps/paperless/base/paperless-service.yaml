@@ -5,10 +5,24 @@ metadata:
   namespace: paperless
 spec:
   ports:
-  - port: 8000
-    protocol: TCP
-    targetPort: 8000
-    nodePort: 30011
+    - port: 8000
+      protocol: TCP
+      targetPort: 8000
+      nodePort: 30011
   selector:
     app: paperless
   type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: paperless-clusterip
+  namespace: paperless
+spec:
+  selector:
+    app: paperless
+  ports:
+    - name: paperless-ip
+      protocol: TCP
+      port: 80
+      targetPort: 8000
