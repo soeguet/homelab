@@ -18,7 +18,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: commafeed-clusterip
+  name: commafeed-nodeport
   namespace: commafeed
   labels:
     app: commafeed
