@@ -16,7 +16,7 @@ spec:
   - backendRefs:
     - group: ""
       kind: Service
-      name: dashboard-server
+      name: homepage-clusterip
       port: 3000
       weight: 1
     matches:
