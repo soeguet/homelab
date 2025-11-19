@@ -27,7 +27,7 @@ spec:
             claimName: paperless-consume
       containers:
         - name: paperless
-          image: ghcr.io/paperless-ngx/paperless-ngx:1.17.2
+          image: ghcr.io/paperless-ngx/paperless-ngx:2.19.6
           ports:
             - containerPort: 8000
           imagePullPolicy: Always
@@ -55,7 +55,7 @@ spec:
                   name: paperless-secret
                   key: PAPERLESS_ADMIN_PASSWORD
             - name: PAPERLESS_URL
-              value: "https://paperless.yourdomain.com"
+              value: "https://paperless.lokal"
             - name: PAPERLESS_BIND_ADDR
               value: "0.0.0.0"
             - name: PAPERLESS_PORT
