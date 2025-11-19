@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: immich-server-nodeport
+  namespace: immich
+spec:
+  clusterIP: 10.43.118.156
+  clusterIPs:
+  - 10.43.118.156
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 30075
+    port: 2283
+    protocol: TCP
+    targetPort: 2283
+  selector:
+    app.kubernetes.io/controller: main
+    app.kubernetes.io/instance: immich
+    app.kubernetes.io/name: server
+  sessionAffinity: None
+  type: NodePort

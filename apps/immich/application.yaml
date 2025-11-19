@@ -4,17 +4,27 @@ metadata:
   name: immich
   namespace: argocd
 spec:
-  project: default
-  source:
-    repoURL: git@github.com:soeguet/homelab.git
-    targetRevision: HEAD
-    path: apps/immich/base
   destination:
-    server: https://kubernetes.default.svc
     namespace: immich
+    server: https://kubernetes.default.svc
+  project: default
+  sources:
+    - repoURL: ghcr.io/immich-app/immich-charts
+      chart: immich
+      targetRevision: '*'
+      helm:
+        parameters:
+          - name: immich.persistence.library.existingClaim
+            value: immich-library
+          - name: valkey.enabled
+            value: "true"
+          - name: controllers.main.containers.main.image.tag
+            value: v2.2.3
+    
+    - repoURL: git@github.com:soeguet/homelab.git
+      targetRevision: HEAD
+      path: apps/immich/base
+  
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
     syncOptions:
       - CreateNamespace=true
