@@ -14,17 +14,3 @@ spec:
       name: http
   selector:
     app.kubernetes.io/name: homepage
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: homepage
-  namespace: dashboard
-spec:
-  type: NodePort
-  selector:
-    app.kubernetes.io/name: homepage
-  ports:
-    - port: 3000
-      targetPort: 3000
-      nodePort: 30000
