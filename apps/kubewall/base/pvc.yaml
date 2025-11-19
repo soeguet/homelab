@@ -4,6 +4,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: kubewall-data
+  namespace: kubewall-system
 spec:
   accessModes:
     - ReadWriteOnce

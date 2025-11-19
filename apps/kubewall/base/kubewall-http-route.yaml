@@ -3,7 +3,7 @@ kind: HTTPRoute
 metadata:
   annotations:
   name: kubewall-route
-  namespace: kubewall
+  namespace: kubewall-system
 spec:
   hostnames:
   - kubewall.lokal
