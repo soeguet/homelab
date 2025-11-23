@@ -22,6 +22,25 @@ spec:
             value: v2.2.3
           - name: IMMICH_IGNORE_MOUNT_CHECK_ERRORS
             value: "true"
+          - name: env.DB_HOSTNAME
+            value: immich-postgresql
+          - name: env.DB_PORT
+            value: "5432"
+          - name: env.DB_DATABASE_NAME
+            value: immich
+          - name: env.DB_USERNAME
+            value: postgres
+          - name: env.DB_PASSWORD
+            value: ""
+          - name: postgresql.enabled
+            value: "false"
+        valuesObject:
+          env:
+            DB_PASSWORD:
+              valueFrom:
+                secretKeyRef:
+                  name: immich-database
+                  key: DB_PASSWORD
     
     - repoURL: git@github.com:soeguet/homelab.git
       targetRevision: HEAD
