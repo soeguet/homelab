@@ -1,18 +1,19 @@
 postgresql:
   enabled: false
 
-controllers:
-  main:
-    containers:
-      main:
-        env:
-          IMMICH_IGNORE_MOUNT_CHECK_ERRORS: "true"
-          DB_HOSTNAME: immich-postgresql
-          DB_PORT: "5432"
-          DB_DATABASE_NAME: immich
-          DB_USERNAME: immich
-          DB_PASSWORD:
-            valueFrom:
-              secretKeyRef:
-                name: immich-database
-                key: DB_PASSWORD
+server:
+  controllers:
+    main:
+      containers:
+        main:
+          env:
+            IMMICH_IGNORE_MOUNT_CHECK_ERRORS: "true"
+            DB_HOSTNAME: immich-postgresql
+            DB_PORT: "5432"
+            DB_DATABASE_NAME: immich
+            DB_USERNAME: immich
+            DB_PASSWORD:
+              valueFrom:
+                secretKeyRef:
+                  name: immich-database
+                  key: DB_PASSWORD
