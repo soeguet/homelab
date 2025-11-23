@@ -15,7 +15,7 @@ spec:
 
     - repoURL: ghcr.io/immich-app/immich-charts
       chart: immich
-      targetRevision: 'v2.3.1'
+      targetRevision: '0.10.3'
       helm:
         valueFiles:
           - $values/apps/immich/base/values.yaml
