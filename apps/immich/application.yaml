@@ -9,6 +9,10 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   sources:
+    - repoURL: git@github.com:soeguet/homelab.git
+      targetRevision: HEAD
+      ref: values
+
     - repoURL: ghcr.io/immich-app/immich-charts
       chart: immich
       targetRevision: '*'
@@ -22,10 +26,6 @@ spec:
             value: "true"
           - name: controllers.main.containers.main.image.tag
             value: v2.2.3
-    
-    - repoURL: git@github.com:soeguet/homelab.git
-      targetRevision: HEAD
-      ref: values
 
     - repoURL: git@github.com:soeguet/homelab.git
       targetRevision: HEAD
