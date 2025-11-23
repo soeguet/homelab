@@ -25,7 +25,7 @@ spec:
           - name: valkey.enabled
             value: "true"
           - name: controllers.main.containers.main.image.tag
-            value: v2.2.3
+            value: v2.3.1
 
     - repoURL: git@github.com:soeguet/homelab.git
       targetRevision: HEAD
