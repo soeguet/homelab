@@ -20,7 +20,7 @@ spec:
             value: "true"
           - name: controllers.main.containers.main.image.tag
             value: v2.2.3
-          - name: env.IMMICH_IGNORE_MOUNT_CHECK_ERRORS
+          - name: IMMICH_IGNORE_MOUNT_CHECK_ERRORS
             value: "true"
     
     - repoURL: git@github.com:soeguet/homelab.git
