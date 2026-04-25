@@ -1,25 +1,26 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  annotations:
-  name: paperless-route
+  name: paperless-httproute
   namespace: paperless
 spec:
   hostnames:
-  - paperless.lokal
+    - paperless.lokal
   parentRefs:
-  - group: gateway.networking.k8s.io
-    kind: Gateway
-    name: traefik-gateway
-    namespace: kube-system
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: nginx-gateway
+      namespace: default
+      port: 443
+      sectionName: https
   rules:
-  - backendRefs:
-    - group: ""
-      kind: Service
-      name: paperless-clusterip
-      port: 80
-      weight: 1
-    matches:
-    - path:
-        type: PathPrefix
-        value: /
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: paperless-service
+          port: 80
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

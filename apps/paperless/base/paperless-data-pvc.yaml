@@ -1,39 +1,44 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: paperless-data
+  name: paperless-data-pvc
   namespace: paperless
 spec:
   accessModes:
-    - ReadWriteMany
+  - ReadWriteOnce
   resources:
     requests:
       storage: 4Gi
-  storageClassName: nfs-client
+  storageClassName: custom-local-path
+  volumeMode: Filesystem
+  volumeName: paperless-data-pv
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: paperless-media
+  name: paperless-media-pvc
   namespace: paperless
 spec:
   accessModes:
-    - ReadWriteMany
+  - ReadWriteOnce
   resources:
     requests:
       storage: 4Gi
-  storageClassName: nfs-client
+  storageClassName: custom-local-path
+  volumeMode: Filesystem
+  volumeName: paperless-media-pv
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: paperless-consume
+  name: paperless-consume-pvc
   namespace: paperless
 spec:
   accessModes:
-    - ReadWriteMany
+  - ReadWriteOnce
   resources:
     requests:
-      storage: 2Gi
-  storageClassName: nfs-client
-
+      storage: 4Gi
+  storageClassName: custom-local-path
+  volumeMode: Filesystem
+  volumeName: paperless-consume-pv

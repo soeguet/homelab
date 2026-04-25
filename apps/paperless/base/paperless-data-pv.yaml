@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: paperless-data-pv
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 4Gi
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: paperless-data-pvc
+    namespace: paperless
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node01
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: custom-local-path
+  volumeMode: Filesystem
+  local:
+    path: /home/soeguet/paperless/data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: paperless-media-pv
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 4Gi
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: paperless-media-pvc
+    namespace: paperless
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node01
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: custom-local-path
+  volumeMode: Filesystem
+  local:
+    path: /home/soeguet/paperless/media
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: paperless-consume-pv
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 4Gi
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: paperless-consume-pvc
+    namespace: paperless
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - node01
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: custom-local-path
+  volumeMode: Filesystem
+  local:
+    path: /home/soeguet/paperless/consume
