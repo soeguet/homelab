@@ -9,28 +9,28 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   sources:
-    - repoURL: git@github.com:soeguet/homelab.git
-      targetRevision: HEAD
-      ref: values
+  - repoURL: https://github.com/soeguet/homelab.git
+    targetRevision: HEAD
+    ref: values
 
-    - repoURL: ghcr.io/immich-app/immich-charts
-      chart: immich
-      targetRevision: '0.10.3'
-      helm:
-        valueFiles:
-          - $values/apps/immich/base/values.yaml
-        parameters:
-          - name: immich.persistence.library.existingClaim
-            value: immich-library
-          - name: valkey.enabled
-            value: "true"
-          - name: controllers.main.containers.main.image.tag
-            value: v2.3.1
+  - repoURL: ghcr.io/immich-app/immich-charts
+    chart: immich
+    targetRevision: '0.10.3'
+    helm:
+      valueFiles:
+      - $values/apps/immich/base/values.yaml
+      parameters:
+      - name: immich.persistence.library.existingClaim
+        value: immich-library
+      - name: valkey.enabled
+        value: "true"
+      - name: controllers.main.containers.main.image.tag
+        value: v2.3.1
 
-    - repoURL: git@github.com:soeguet/homelab.git
-      targetRevision: HEAD
-      path: apps/immich/base
+  - repoURL: https://github.com/soeguet/homelab.git
+    targetRevision: HEAD
+    path: apps/immich/base
 
   syncPolicy:
     syncOptions:
-      - CreateNamespace=true
+    - CreateNamespace=true

@@ -9,10 +9,10 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   sources:
-    - chart: linkding
-      repoURL: https://charts.pascaliske.dev
-      targetRevision: 2.2.0
+  - chart: linkding
+    repoURL: https://charts.pascaliske.dev
+    targetRevision: 2.2.0
 
-    - repoURL: git@github.com:soeguet/homelab.git
-      targetRevision: HEAD
-      path: apps/linkding/base
+  - repoURL: https://github.com/soeguet/homelab.git
+    targetRevision: HEAD
+    path: apps/linkding/base
